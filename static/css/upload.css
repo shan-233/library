@@ -1,0 +1,228 @@
+/*選擇檔案*/
+#imagePreview {
+  width: 290px;
+  height: 380px;
+  padding: auto;
+  background-size: cover;
+  -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
+  display: inline-block;
+  content: "click Here";
+  color: black;
+}
+#imagePreview img{
+  width: 100%;
+  z-index:-9999;
+  position: relative;
+}
+
+input[type="file"] {
+  display: none;
+}
+.btn-primary
+{
+  display:block;
+  border-radius:0px;
+  box-shadow:0px 4px 6px 2px rgba(0,0,0,0.2);
+  margin-top:10px;
+}
+/*回首頁*/
+.home{
+  float: left;
+  font-size: 18px;
+  z-index: 9999;
+  text-align: right;
+
+}
+/*使用者*/
+.headuser{
+  float: left; 
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+/*登出按鈕*/
+.lodoutbt{
+  float: 100%;
+  text-align: center;
+  font-size:18px;
+}
+
+/*更新及上傳資料按鈕樣式*/
+.custom-btn {
+  font-family:Microsoft JhengHei;
+  width: 150px;
+  height: 40px;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 0px 10px 0px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+  7px 7px 20px 0px rgba(0,0,0,.1),
+  4px 4px 5px 0px rgba(0,0,0,.1);
+  outline: none;
+}
+
+/*更新及上傳資料按鈕樣式*/
+.btn-1 {
+  background: rgb(148, 192, 17);
+  background: linear-gradient(0deg, rgb(154, 201, 15) 0%, rgb(121, 156, 14) 100%);
+  border: none;
+}
+.btn-1:hover {
+  background: rgb(161, 207, 23);
+  background: linear-gradient(0deg, rgb(169, 216, 27) 0%, rgb(174, 221, 31) 100%);
+}
+
+/*登出樣式*/
+.custom-btn-2 {
+  width: 100px;
+  height: 40px;
+  color: #fff;
+  border-radius: 5px;
+  /* margin: 0px 180px 0px 0px; */
+  /* padding: 10px 25px; */
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+  7px 7px 20px 0px rgba(0,0,0,.1),
+  4px 4px 5px 0px rgba(0,0,0,.1);
+  outline: none;
+}
+
+.btn-2 {
+  background: rgb(109, 43, 214);
+  background: linear-gradient(0deg, rgb(110, 48, 209) 0%,rgb(171, 75, 255) 100%);
+  border: none;
+  
+}
+.btn-2:before {
+  height: 0%;
+  width: 2px;
+}
+.btn-2:hover {
+  box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
+  -4px -4px 6px 0 rgba(116, 125, 136, .5), 
+  inset -4px -4px 6px 0 rgba(255,255,255,.2),
+  inset 4px 4px 6px 0 rgba(0, 0, 0, .4);
+}
+/*回上一頁*/
+.custom-btn-3 {
+  width: 100px;
+  height: 40px;
+  color: #fff;
+  border-radius: 5px;
+  /* margin: 0px 180px 0px 0px; */
+  /* padding: 10px 25px; */
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+  7px 7px 20px 0px rgba(0,0,0,.1),
+  4px 4px 5px 0px rgba(0,0,0,.1);
+  outline: none;
+}
+
+.btn-3 {
+  background: rgb(12, 129, 70);
+  background: linear-gradient(0deg, rgb(26, 138, 86) 0%, rgb(52, 187, 124) 100%);
+  border: none;
+  
+}
+.btn-3:before {
+  height: 0%;
+  width: 2px;
+}
+.btn-3:hover {
+  box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
+  -4px -4px 6px 0 rgba(116, 125, 136, .5), 
+  inset -4px -4px 6px 0 rgba(255,255,255,.2),
+  inset 4px 4px 6px 0 rgba(0, 0, 0, .4);
+}
+/*新增書籍*/
+.custom-btn-4 {
+  width: 100px;
+  height: 40px;
+  color: #fff;
+  border-radius: 5px;
+  /* margin: 0px 180px 0px 0px; */
+  /* padding: 10px 25px; */
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+  7px 7px 20px 0px rgba(0,0,0,.1),
+  4px 4px 5px 0px rgba(0,0,0,.1);
+  outline: none;
+}
+
+.btn-4 {
+  background: rgb(21, 122, 189);
+  background: linear-gradient(0deg, rgb(51, 90, 196) 0%, rgb(51, 144, 231) 100%);
+  border: none;
+  
+}
+.btn-4:before {
+  height: 0%;
+  width: 2px;
+}
+.btn-4:hover {
+  box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
+  -4px -4px 6px 0 rgba(116, 125, 136, .5), 
+  inset -4px -4px 6px 0 rgba(255,255,255,.2),
+  inset 4px 4px 6px 0 rgba(0, 0, 0, .4);
+}
+
+/*文字內容*/
+.content{
+  text-align: justify;
+  line-height: 30px;
+}
+/*設定表格*/
+table.gridtable {
+  width: 95%;
+	font-family: verdana,arial,sans-serif;
+	font-size:15px;
+  text-align: center;
+  margin-left: 10px;
+	color:#ffffff;
+	border-width: 1px;
+	border-color: #ffffff;
+	border-collapse: collapse;
+}
+table.gridtable th {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #ffffff;
+	background-color: #0077a7;
+}
+table.gridtable td {
+  color:#505050;
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #ffffff;
+	background-color: #cee4f7;
+}
+.text:hover{
+  text-decoration:none;
+}
