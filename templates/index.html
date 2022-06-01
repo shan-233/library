@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/index.css">
+    <link rel="stylesheet" href="/static/css/upload.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <title>首頁</title>
+</head>
+
+<body>
+    <!-- {% csrf_token %} -->
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-10" style="float: left;"></div>
+            <div class="col-2 home"><a href="/index/">回首頁</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+            <div class="col-12" style="margin: -30px 0px -50px 0px;"><img src="/static/images/headBG.png" width="100%" ></div>
+            <div class="col-7" style="float: left;"></div>
+            <div class="col-3 headuser" style="margin: 8px 10px 0px 20px;color: red; font-size: 18px;text-align: right;">要借閱前請先登入系統~</div>
+            <div class="col-1 logoutbt"><a href="/login/"><button class="custom-btn-2 btn-2">登入</button></a></div>
+        </div>
+        <div class="row">
+            <div class="col-12">&nbsp;</div>
+            <div class="col-12" style="display: flex; align-items: center; font-size: 24px; color: rgb(0,76,112); font-weight: bolder; font-family:Microsoft JhengHei;">本館書籍總覽</div>
+            <div class="col-12"><hr style="border: 1.5px solid rgb(0, 0, 0);"></div>
+        </div>
+      </div>
+      
+      <div class="col-12">&nbsp;</div>
+
+
+      <div class="container">
+        <div class="row">
+          <div class="col-8" style="align-items: center; display: flex; margin: 10px 0px 20px 0px;">
+            {% for book in books %}
+            <ul >
+                <li style="border:1px #cccccc solid; width: 120px; float:left; display: inline; margin: 0px 50px 0px 0px;">
+                <div><a href="/book/{{book.id}}"><img src="/media/{{book.burl}}" width="100" height="120" border="0" /></a></div>
+                <div style="text-align:center ;"><a href="/book/{{book.id}}">{{book.name}}</a></div></li>     
+            </ul>
+        {% endfor %}
+          </div>
+          <div class="col-4">
+
+            
+            <!-- 書籍關鍵字查詢 -->
+            <form action="" method="get">
+                <div class="input-group mb-3"><p style="margin: 7px 0px 0px 0px;">書籍查詢&nbsp;&nbsp;</p>
+                    <input type="text" name="book_name" id="book_name" class="form-control" placeholder="請輸入關鍵字" aria-describedby="button-addon2" required oninvalid="setCustomValidity('請輸入關鍵字')" oninput="setCustomValidity('');">
+                    <input class="btn btn-outline-secondary" type="submit" id="button-addon2" value="查詢" class=""></div>
+            </form>
+
+           
+
+
+            <div class="input-group mb-3" style="padding: 30px 0px 0px 0px; font-size: 20px;">點閱排行Top5</div>
+        </div>
+        </div>
+        </div>
+      </div>
+
+      <!-- 頁碼 -->
+      <div class="container">
+        <div class="row">
+            <div class="col-1"></div>
+          <div class="col-7" style="padding: 20px 0px 0px 60px;">
+            {{ page_html|safe }}
+        </div>
+        
+
+        <!-- 左下資訊 -->
+        <div class="col-8" style="padding: 100px 0px 0px 0px;">
+            <p style="font-size: 14px; padding: 0px 0px 0px 25px;">*台北校區  &nbsp;&nbsp;校址：臺北市中正區100濟南路一段321號 總機：(02)&nbsp;33222777</p>
+            <p style="font-size: 14px; padding: 0px 0px 0px 25px;">&nbsp;流通服務：(02)&nbsp;23226148　參考諮詢：(02)&nbsp;23226156,23226154</p>
+            <p style="font-size: 14px; padding: 0px 0px 0px 25px;">&nbsp;電子郵件：library@ntub.edu.tw</p>
+              
+            
+        <!-- Top排行榜 -->
+        </div>
+          <div class="col-4" style="margin: -123px 0px 0px 0px;">
+
+            <div style="border:2px rgb(0, 0, 0) dashed; height: 350px; ">
+            {% for top in booksTop %}
+                    <li style="display:inline;">
+                    <div style="padding: 20px 0px 0px 20px;"><a href="/book/{{top.id}}">{{top.name}}</a></div></li> 
+                         
+            {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>        
+
+
+    <p>
+    <span style="color:red">{{message}}</span>
+
+</body>
+</html>
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/upload.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>

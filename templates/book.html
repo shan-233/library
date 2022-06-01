@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/upload.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <title>書籍詳細資訊</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-10" style="float: left;"></div>
+            <div class="col-2 home"><a href="/index/">回首頁</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+            <div class="col-12" style="margin: -30px 0px -50px 0px;"><img src="/static/images/headBG.png" width="100%" ></div>
+            <div class="col-6" style="float: left;margin: 0px 10px 0px 0px;"></div>
+            <div class="col-3 headuser" style="margin: 8px 0px 0px 20px;color: red; font-size: 18px;text-align: right;">要借閱前請先登入系統~</div>
+            <div class="col-1 logoutbt" style="margin: 0px 20px 0px 0px;"><a href="/login/"><button class="custom-btn-2 btn-2">登入</button></a></div>
+            <div class="col-1 logoutbt"><input type="button" value="回上一頁"onClick="window.history.back()"; class="custom-btn-3 btn-3"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">&nbsp;</div>
+            <div class="col-12" style="font-size: 16px;margin-bottom: -15px;"><a href="/index/">書籍詳細資訊</a> > {{book.name}}</div>
+            <div class="col-12"><hr style="border: 1.5px solid rgb(0, 0, 0);"></div>
+        </div>
+
+        <div class="row">
+            <div class="row col-9 col-sm-9">
+                <div class="row">
+                    <div class="col-4 col-sm-4" style="text-align:center;">
+                        <div class="img"><img src="/media/{{book.burl}}" width="200" height="290" border="0" /></div>
+                        <div style="text-align:center; margin-top: 10px;">借閱次數：{{book.bhit}}</div>
+                    </div>
+                    <div class="col-8 col-sm-8 content" style="text-align:left;">
+                        <div style="font-size: 22px; color:rgb(8, 85, 43);" >{{book.name}}</div>
+                        <div>ＩＳＢＮ：{{book.isbn}}</div>
+                        <div>作　　者：{{book.author}}</div>
+                        <div>主　　題：{{book.theme}}</div>
+                        <div>出&nbsp;&nbsp;版&nbsp;&nbsp;社：{{book.publish}}</div>
+                        <div>出&nbsp;&nbsp;版&nbsp;&nbsp;年：{{book.publishyear}}</div>
+                        <div>內　　容：<div style="text-align:justify;" >{{book.desc}}</div></div>
+                        <div style="float: left;">目前狀態：
+                            {%if book.state == 0%}
+                                館藏中
+                            {%else%}
+                                外借中
+                            {%endif%}
+                        </div>
+                    </div>
+                </div> 
+
+            </div>
+
+
+            <div class="col-12" style="text-align:center; margin: -330px 0px 0px 410px; "><p style="font-size: 18px; margin-bottom: 5px;">推薦書籍</p>
+                {% for rcbook in list2 %}
+            
+                <div class="img"><a href="/book/{{rcbook.id}}/"><img src="/media/{{rcbook.burl}}" width="140" height="180" border="0" /></a></div>
+                <div style="padding-bottom: 10px;"><a href="/book/{{rcbook.id}}/">{{rcbook.name}}</a></div>
+
+            {% endfor %}
+    
+                </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-12">&nbsp;</div>
+            <div class="col-12"><hr style="border: 1px solid rgb(0, 0, 0);"></div>
+            <div class="col-12" style="text-align: center; color:rgb(134, 134, 134); font-size: 14px;margin-bottom: 10px;">台北校區 校址：台北市中正區100濟南路一段321號 <br>總機：(02)33222777</div>
+        </div>
+
+    </div>
+</body>
+</html>
+
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/upload.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>

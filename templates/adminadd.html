@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/upload.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <title>新增書籍資訊</title>
+</head>
+</head>
+<body>
+  {%if request.user.is_superuser%}
+      <div class="container">
+        <div class="row">
+          <div class="col-10" style="float: left;"></div>
+          <div class="col-2 home"><a href="/adminmain/">回首頁</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+          <div class="col-12" style="margin: -30px 0px -50px 0px;"><img src="/static/images/headBG.png" width="100%" ></div>
+          <div class="col-7" style="float: left;"></div>
+          <div class="col-2 headuser" style="padding: 6px 0px 0px 15px; margin: 0px 10px 0px 20px;">Hi~&nbsp;&nbsp;{{nowuser}}&nbsp;&nbsp;管理者</div>
+          <div class="col-1 logoutbt" style="margin: 0px 20px 0px 0px;"><a href="/logout/"><button class="custom-btn-2 btn-2">登出</button></a></div>
+          <div class="col-1 logoutbt"><input type="button" value="回上一頁"onClick="window.history.back()"; class="custom-btn-3 btn-3"></div>
+        </div>
+        <div class="row">
+            <div class="col-12">&nbsp;</div>
+            <div class="col-12" style="display: flex; align-items: center; font-size: 24px; color: rgb(0,76,112); font-weight: bolder; font-family:Microsoft JhengHei;">書籍總覽管理－新增書籍資訊</div>
+            <div class="col-12"><hr style="border: 1.5px solid rgb(0, 0, 0);"></div>
+            
+        </div>
+      </div>
+      <form action="." method="POST" name="form1" id="form1" enctype="multipart/form-data" >
+      {% csrf_token %}
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="row">
+                <div class="col-4 col-sm-4" style="text-align:center;">
+
+                  <div id="imagePreview"><img src="/static/images/new-document.png" style="width: 50%; padding: 120px 0 120px 20px;"></div>
+                  <label class="btn btn-primary">選擇檔案<input id="book_burl" type="file" name="book_burl" class="img" required/></label>
+                  <p style="color: red;">若沒有選擇檔案則無法新增喔~~</p>
+                </div>
+                <div class="col-8 col-sm-8">
+                  <p>書　　名：
+                  <input type="text" name="book_name" id="book_name" required />
+                  </p>
+                  <p>ＩＳＢＮ：
+                  <input type="text" name="book_isbn" id="book_isbn"required />
+                  </p>
+                  <p>作　　者：
+                  <input type="text" name="book_author" id="book_author"required />
+                  </p>
+                  <p>主　　題：
+                  <select name="book_theme" id="book_theme" required style="width:202px; height: 30px;"> 
+                    <option></option>
+                    <option>兒童繪本</option>
+                    <option>懸疑推理輕小說</option>
+                    <option>程式設計</option>
+                    <option>中文古典文學</option>
+                  </select>
+                  <p>出&nbsp;&nbsp;版&nbsp;&nbsp;社：
+                  <input type="text" name="book_publish" id="book_publish" required>
+                  </p>
+                  <p>出&nbsp;&nbsp;版&nbsp;&nbsp;年：
+                  <input type="text" name="book_publishyear" id="book_publishyear" required>
+                  </p>
+                  <p>閱　　讀：
+                  <input type="text" name="book_readurl" id="book_readurl" required>
+                  </p>
+                  <p>內　　容：
+                  <textarea name="book_desc" id="book_desc" cols="45" rows="5"></textarea>
+                  </p>
+                  <p>&nbsp;</p>
+                  <p>&nbsp;</p>
+                  <input type="submit" name="button3" id="button3" value="新增書籍" class="custom-btn btn-1">
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+  {%else%}
+    <p>您尚未登入喔</p>
+    <a href="/login/">login</a>
+  {%endif%}
+</body>
+</html>
+
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/upload.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
