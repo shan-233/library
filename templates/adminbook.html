@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,113 +9,126 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <title>管理－書籍詳細資訊</title>
 </head>
+
 <body>
     {%if request.user.is_superuser%}
-        <div class="container">
-            <div class="row">
-                <div class="col-10" style="float: left;"></div>
-                <div class="col-2 home"><a href="/adminmain/">回首頁</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                <div class="col-12" style="margin: -30px 0px -50px 0px;"><img src="/static/images/headBG.png" width="100%" ></div>
-                <div class="col-7" style="float: left;"></div>
-                <div class="col-2 headuser" style="padding: 6px 0px 0px 15px; margin: 0px 10px 0px 20px;">Hi~&nbsp;&nbsp;{{nowuser}}&nbsp;&nbsp;管理者</div>
-                <div class="col-1 logoutbt" style="margin: 0px 20px 0px 0px;"><a href="/logout/"><button class="custom-btn-2 btn-2">登出</button></a></div>
-                <div class="col-1 logoutbt"><button class="custom-btn-3 btn-3" onClick="window.history.back()">回上一頁</button></div>
-            </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-10" style="float: left;"></div>
+            <div class="col-2 home"><a href="/adminmain/">回首頁</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+            <div class="col-12" style="margin: -30px 0px -50px 0px;"><img src="/static/images/headBG.png" width="100%"></div>
+            <div class="col-7" style="float: left;"></div>
+            <div class="col-2 headuser" style="padding: 6px 0px 0px 15px; margin: 0px 10px 0px 20px;">Hi~&nbsp;&nbsp;{{nowuser}}&nbsp;&nbsp;管理者</div>
+            <div class="col-1 logoutbt" style="margin: 0px 20px 0px 0px;"><a href="/logout/"><button class="custom-btn-2 btn-2">登出</button></a></div>
+            <div class="col-1 logoutbt"><button class="custom-btn-3 btn-3" onClick="window.history.back()">回上一頁</button></div>
+        </div>
 
-            <div class="row">
-                <div class="col-12">&nbsp;</div>
-                <div class="col-12" style="font-size: 16px;margin-bottom: -15px;"><a href="/adminmain/">書籍總覽管理</a> > {{book.name}}</div>
-                <div class="col-12"><hr style="border: 1.5px solid rgb(0, 0, 0);"></div>
+        <div class="row">
+            <div class="col-12">&nbsp;</div>
+            <div class="col-12" style="font-size: 16px;margin-bottom: -15px;"><a href="/adminmain/">書籍總覽管理</a> > {{book.name}}</div>
+            <div class="col-12">
+                <hr style="border: 1.5px solid rgb(0, 0, 0);">
             </div>
+        </div>
 
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="row col-9 col-sm-9">
-                        <div class="row">
-                            <div class="col-4 col-sm-4" style="text-align:center;">
-                                <div class="img"><img src="/media/{{book.burl}}" width="200" height="290" border="0" /></div>
-                                <div style="text-align:center; margin-top: 10px;">借閱次數：{{book.bhit}}</div>
-                            </div>
-                            <div class="col-8 col-sm-8 content" style="text-align:left;">
-                                <div style="font-size: 22px; color:rgb(8, 85, 43);" >{{book.name}}</div>
-                                <div>ＩＳＢＮ：{{book.isbn}}</div>
-                                <div>作　　者：{{book.author}}</div>
-                                <div>主　　題：{{book.theme}}</div>
-                                <div>出&nbsp;&nbsp;版&nbsp;&nbsp;社：{{book.publish}}</div>
-                                <div>出&nbsp;&nbsp;版&nbsp;&nbsp;年：{{book.publishyear}}</div>
-                                <div>閱　　讀：{{book.readurl}}</div>
-                                <div>內　　容：<div style="text-align:justify;" >{{book.desc}}</div></div>
-                            </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="row col-9 col-sm-9">
+                    <div class="row">
+                        <div class="col-4 col-sm-4" style="text-align:center;">
+                            <div class="img"><img src="/media/{{book.burl}}" width="200" height="290" border="0" /></div>
+                            <div style="text-align:center; margin-top: 10px;">借閱次數：{{book.bhit}}</div>
                         </div>
-
-                        <div class="row">
-                            <div class="col-12" style="margin-top:20px;">&nbsp;</div>
-                            <div class="col-3 col-sm-3" style="font-size: 20px; margin:10px 0px 10px -8px; text-align: left;"> <img src="/static/images/book-icon.png" width="40px" height="40px"> 書籍狀況</div>
-                            <table class="col-12 col-sm-12 gridtable" style="table-layout:fixed">
-                                <tr>
-                                    <th>目前狀況</th><th>借閱者</th><th>聯絡資訊</th><th>到期日</th>
-                                </tr>
-                                <tr>
-                                    
-                                    <td>{%if book.state == 0%}
-                                            <div>館藏中</div>
-                                        {%else%}
-                                            <div>外借中</div>
-                                        {%endif%}
-                                    </td>
-                                    <td>{%if book.borrower == '' %}
-                                            <div>無人借閱</div>
-                                        {%else%}
-                                            <div>{{book.borrower}}</div>
-                                        {%endif%}
-                                    </td>
-                                    <td>{%if book.connection == '' %}
-                                            <div>無</div>
-                                        {%else%}
-                                            <div>{{book.connection}}</div>
-                                        {%endif%}
-                                    </td>
-                                    <td>
-                                        {%if book.redate == '' %}
-                                            <div>無</div>
-                                        {%else%}
-                                            <div>{{book.redate}}</div>
-                                        {%endif%}
-                                    </td>
-                                </tr>
-            
-                            </table>
+                        <div class="col-8 col-sm-8 content" style="text-align:left;">
+                            <div style="font-size: 22px; color:rgb(8, 85, 43);">{{book.name}}</div>
+                            <div>ＩＳＢＮ：{{book.isbn}}</div>
+                            <div>作　　者：{{book.author}}</div>
+                            <div>主　　題：{{book.theme}}</div>
+                            <div>出&nbsp;&nbsp;版&nbsp;&nbsp;社：{{book.publish}}</div>
+                            <div>出&nbsp;&nbsp;版&nbsp;&nbsp;年：{{book.publishyear}}</div>
+                            <div>閱　　讀：{{book.readurl}}</div>
+                            <div>內　　容：
+                                <div style="text-align:justify;">{{book.desc}}</div>
+                            </div>
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-12" style="margin-top:20px;">&nbsp;</div>
+                        <div class="col-3 col-sm-3" style="font-size: 20px; margin:10px 0px 10px -8px; text-align: left;"> <img src="/static/images/book-icon.png" width="40px" height="40px"> 書籍狀況</div>
+                        <table class="col-12 col-sm-12 gridtable" style="table-layout:fixed">
+                            <tr>
+                                <th>目前狀況</th>
+                                <th>借閱者</th>
+                                <th>聯絡資訊</th>
+                                <th>到期日</th>
+                            </tr>
+                            <tr>
+
+                                <td>{%if book.state == 0%}
+                                    <div>館藏中</div>
+                                    {%else%}
+                                    <div>外借中</div>
+                                    {%endif%}
+                                </td>
+                                <td>{%if book.borrower == '' %}
+                                    <div>無人借閱</div>
+                                    {%else%}
+                                    <div>{{book.borrower}}</div>
+                                    {%endif%}
+                                </td>
+                                <td>{%if book.connection == '' %}
+                                    <div>無</div>
+                                    {%else%}
+                                    <div>{{book.connection}}</div>
+                                    {%endif%}
+                                </td>
+                                <td>
+                                    {%if book.redate == '' %}
+                                    <div>無</div>
+                                    {%else%}
+                                    <div>{{book.redate}}</div>
+                                    {%endif%}
+                                </td>
+                            </tr>
+
+                        </table>
+                    </div>
                 </div>
-
             </div>
-            
 
-            <div class="col-12" style="text-align:center; margin: -485px 0px 20px 410px; "><p style="font-size: 18px; margin-bottom: 5px;">推薦書籍</p>
+        </div>
+
+
+        <div class="col-12" style="text-align:center; margin: -485px 0px 20px 410px; ">
+            <p style="font-size: 18px; margin-bottom: 5px;">推薦書籍</p>
             {% for rcbook in list2 %}
-            
-                <div class="img"><a href="/adminbook/{{rcbook.id}}/"><img src="/media/{{rcbook.burl}}" width="140" height="180" border="0" /></a></div>
-                <div style="margin-bottom: 10px;"><a href="/adminbook/{{rcbook.id}}/">{{rcbook.name}}</a></div>
+
+            <div class="img">
+                <a href="/adminbook/{{rcbook.id}}/"><img src="/media/{{rcbook.burl}}" width="140" height="180" border="0" /></a>
+            </div>
+            <div style="margin-bottom: 10px;"><a href="/adminbook/{{rcbook.id}}/">{{rcbook.name}}</a></div>
 
             {% endfor %}
 
-            </div>
-            
-
-            <div class="row">
-                <div class="col-12">&nbsp;</div>
-                <div class="col-12"><hr style="border: 1px solid rgb(0, 0, 0);"></div>
-                <div class="col-12" style="text-align: center; color:rgb(134, 134, 134); font-size: 14px;">台北校區 校址：台北市中正區100濟南路一段321號 <br>總機：(02)33222777</div>
-            </div>
-        
         </div>
+
+
+        <div class="row">
+            <div class="col-12">&nbsp;</div>
+            <div class="col-12">
+                <hr style="border: 1px solid rgb(0, 0, 0);">
+            </div>
+            <div class="col-12" style="text-align: center; color:rgb(134, 134, 134); font-size: 14px;">台北校區 校址：台北市中正區100濟南路一段321號 <br>總機：(02)33222777</div>
+        </div>
+
+    </div>
     {%else%}
-        <p>您尚未登入喔</p>
-        <a href="/login/">login</a>
-    {%endif%}
-        
+    <p>您尚未登入喔</p>
+    <a href="/login/">login</a> {%endif%}
+
 </body>
+
 </html>
 <script src="/static/js/jquery.min.js"></script>
 <script src="/static/js/upload.js"></script>
