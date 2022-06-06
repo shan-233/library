@@ -1,16 +1,17 @@
 import os
-import datetime
 import random
-from django.shortcuts import render, redirect
+import datetime
+from utils import mypage
+from utils import mypage2
 from libraryapp import models
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate
 from django.contrib import auth
 from django.core.files.storage import FileSystemStorage
 from django.conf import settings
-from utils import mypage
-from utils import mypage2
 from django.db.models import Q # 用來完成比較複雜或動態查詢，像是OR、AND這些運算式，可以轉成SQL語法
 
+# 首頁
 def index(request):
     booksTop = models.bookModel.objects.all().order_by('-bhit')[:5]
     bookname = request.GET.get('book_name')
@@ -23,7 +24,7 @@ def index(request):
         page_html = page_obj.page_html()
         return render(request, "index.html", {"books": data, "page_html": page_html,"booksTop": booksTop})
     else:
-        books = models.bookModel.objects.all().filter(Q(name__contains=bookname))
+        books = models.bookModel.objects.all().filter(Q(name__contains=bookname)) # LIKE查詢(包含輸入的值)
         total_count = books.count() # 取得總共有幾筆
         current_page = request.GET.get("page", None) # 在URL上拿到page參數
         page_obj = mypage2.MyPage(current_page, total_count, url_prefix="index", max_show=2, book_name=bookname)
@@ -209,11 +210,13 @@ def adminfix(request, bookid=None,uptype=None):
         return redirect('/adminmain/')  
     return render(request, "adminfix.html", locals())
 
+#書籍借閱狀況
 def adminall(request):
     books = models.bookModel.objects.all().order_by('-id')
     nowuser = request.user.username
     return render(request, "adminall.html", locals())
 
+# 個人書房
 def userstudy(request):
     nowuser = request.user.username
     books = models.bookModel.objects.all().filter(Q(borrower__exact=nowuser))
