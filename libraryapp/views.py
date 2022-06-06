@@ -1,41 +1,35 @@
+import os
+import datetime
+import random
 from django.shortcuts import render, redirect
 from libraryapp import models
 from django.contrib.auth import authenticate
 from django.contrib import auth
 from django.core.files.storage import FileSystemStorage
 from django.conf import settings
-import os
-import datetime
-import random
 from utils import mypage
 from utils import mypage2
-from django.db.models import Q
+from django.db.models import Q # 用來完成比較複雜或動態查詢，像是OR、AND這些運算式，可以轉成SQL語法
 
 def index(request):
     booksTop = models.bookModel.objects.all().order_by('-bhit')[:5]
     bookname = request.GET.get('book_name')
     if bookname == None:
         books = models.bookModel.objects.all().order_by('-id')
-        # 拿到总数据量
         total_count = books.count()
-            # 从url拿到page参数
         current_page = request.GET.get("page", None)
         page_obj = mypage.MyPage(current_page, total_count, url_prefix="index", max_show=2)
-            # 对总数据进行切片，拿到页面显示需要的数据
         data = books[page_obj.start:page_obj.end]
         page_html = page_obj.page_html()
         return render(request, "index.html", {"books": data, "page_html": page_html,"booksTop": booksTop})
     else:
         books = models.bookModel.objects.all().filter(Q(name__contains=bookname))
-        # 拿到总数据量
-        total_count = books.count()
-            # 从url拿到page参数
-        current_page = request.GET.get("page", None)
+        total_count = books.count() # 取得總共有幾筆
+        current_page = request.GET.get("page", None) # 在URL上拿到page參數
         page_obj = mypage2.MyPage(current_page, total_count, url_prefix="index", max_show=2, book_name=bookname)
-            # 对总数据进行切片，拿到页面显示需要的数据
-        data = books[page_obj.start:page_obj.end]
+        data = books[page_obj.start:page_obj.end] # 對資料做分頁，假設一頁3筆，共15筆，就會有5頁
         page_html = page_obj.page_html()
-        return render(request, "index.html", {"books": data, "page_html": page_html,'book_name':bookname,"booksTop": booksTop})
+        return render(request, "index.html", {"books": data, "page_html": page_html,'book_name':bookname,"booksTop": booksTop}) #回傳值
 
 def login(request):  #登入
     messages = ''  #初始時清除訊息
@@ -156,9 +150,9 @@ def userbook(request,bookid,btype=None):
     list1=list(sametheme)
     for i in range(0,len(list1)):
         if list1[i].id==bookid:
-            list1.pop(i)
+            list1.pop(i) # 刪除原本點的書籍，以防止推薦書籍出現重複書籍
             break
-    list2=random.sample(list1,2)
+    list2=random.sample(list1,2) #生成隨機
     if btype == 'borrow':
         if book.state == False:
             date = datetime.date.today() + datetime.timedelta(days=7)

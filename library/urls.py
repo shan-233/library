@@ -22,7 +22,7 @@ urlpatterns = [
     path('userbook/<int:bookid>/<str:btype>/', views.userbook),
     path('adminbook/<int:bookid>/', views.adminbook),
     path('adminall/', views.adminall),
-    url(r'^index/', views.index),
+    url(r'^index/', views.index), # 正規表示法，^為開頭,通常會搭配一個$代表URL結尾，沒有$代表後面可以加其他字串
     path('index/<str:book_name>/', views.index),
     url(r'^usermain/', views.index),
     path('usermain/<str:book_name>/', views.index),
